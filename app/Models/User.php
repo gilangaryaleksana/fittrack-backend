@@ -12,14 +12,20 @@ class User extends Authenticatable
 
     protected $fillable = [
         'name', 'username', 'email', 'password', 'avatar', 'bio',
-        'weight', 'height', 'city', 'country',
+        'weight', 'height', 'height_cm', 'weight_kg', 'birth_date',
+        'gender', 'city', 'country',
     ];
 
     protected $hidden = ['password', 'remember_token'];
 
     protected function casts(): array
     {
-        return ['password' => 'hashed'];
+        return [
+            'password' => 'hashed',
+            'height_cm' => 'float',
+            'weight_kg' => 'float',
+            'birth_date' => 'date',
+        ];
     }
 
     public function activities() { return $this->hasMany(Activity::class); }
